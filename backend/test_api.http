@@ -1,0 +1,21 @@
+POST http://127.0.0.1:5000/recipe/recipes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyNjk3NzEyMywianRpIjoiNDlkZmUzM2QtZjdmNy00NjM2LWExMjctMjNmMDZjNGMzNzM0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNpbW8iLCJuYmYiOjE3MjY5NzcxMjMsImNzcmYiOiIwYTU2N2QzZS05YjAxLTRjNDYtYTMwNy01MjkzZjRkMjY0ZjIiLCJleHAiOjE3MjY5NzgwMjN9.b1Ghj3jI7e0pTCu2areKYEriQhxq15SbmhUuyVOAf2w
+
+{
+  "title": "Recipe Title",
+  "description": "This is a recipe description",
+  "full_name": "John Doe",
+  "cin": "CIN123456",
+  "phone_number": "123456789",
+  "email": "john@example.com",
+  "age": 30,
+  "gender": "MWale",
+  "state": "StateQQName",
+  "city": "CityNaWme",
+  "address": "123 Main St",
+  "marital_status": "Single",
+  "nbr_of_children": 0,
+  "occupation": "Chef",
+  "salary": 4000.00
+}
