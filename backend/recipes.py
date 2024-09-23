@@ -61,7 +61,7 @@ class RecipesResource(Resource) :
         new_recipe = Recipe(
             title=data.get('title'),
             description=data.get('description'),
-            full_name=data.get('full name'),
+            full_name=data.get('full_name'),
             cin=data.get('cin'),
             phone_number=data.get('phone_number'),
             email=data.get('email'),
@@ -101,7 +101,21 @@ class RecipeResource(Resource):
         
         data=request.get_json()
         
-        recipe_to_update.update(data.get('title'),data.get('description'))
+        recipe_to_update.update(data.get('title'),data.get('description'),
+        data.get('full_name'),
+        data.get('cin'),
+        data.get('phone_number'),
+        data.get('email'),
+        data.get('age'),
+        data.get('gender'),
+        data.get('state'),
+        data.get('city'),
+        data.get('address'),
+        data.get('marital_status'),
+        data.get('nbr_of_children', 0),
+        data.get('occupation'),
+        data.get('salary')
+        )
         
         return recipe_to_update
         

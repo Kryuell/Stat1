@@ -5,7 +5,7 @@ const Recipe=({full_name,cin,phone_number,email,age,gender,state,city,address,ma
     return(
         <Card className="recipe">
             <Card.Body>
-            <p>{full_name}</p>
+                <p>{full_name}</p>
                 <p>{cin}</p>
                 <p>{phone_number}</p>
                 <p>{email}</p>
