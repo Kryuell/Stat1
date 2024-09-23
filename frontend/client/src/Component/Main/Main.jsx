@@ -14,38 +14,324 @@ import teamMember3 from '../../Assests/images (3).jpeg'; // Replace with your ac
 import teamMember4 from '../../Assests/images (3).jpeg'; // Replace with your actual image path
 import { useAuth } from '../../auth';
 import Recipe from '../Recipe';
+import{useForm} from 'react-hook-form'
+import {Modal,Form,Button} from 'react-bootstrap'
 
 
+const LoggedInHome = () => {
+  const [recipes, setRecipes] = useState([]);
+  const [show, setShow] = useState(false);
+  const { register, reset, handleSubmit, setValue, formState: { errors } } = useForm();
+  const [recipeId, setRecipeId] = useState(0);
 
-const LoggedInHome=()=>{
-  const[recipes,setRecipes]=useState([]);
-  useEffect(
-      ()=>{
-        fetch('/recipe/recipes')
-        .then(res=>res.json())
-        .then(data=>{
-          console.log(data)
-          setRecipes(data)
-        })
-        .catch(err=>console.log(err))
-      },[]
+  useEffect(() => {
+    fetch('/recipe/recipes')
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setRecipes(data);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
-  );
-  return(
+  const getAllRecipes = () => {
+    fetch('/recipe/recipes')
+      .then(res => res.json())
+      .then(data => {
+        setRecipes(data);
+      })
+      .catch(err => console.log(err));
+  };
+
+  const closeModal = () => {
+    setShow(false);
+  };
+
+  const showModal = (id) => {
+    setShow(true);
+    setRecipeId(id);
+
+    recipes.forEach((recipe) => {
+      if (recipe.id === id) {
+        setValue('full_name', recipe.full_name);
+        setValue('CIN', recipe.cin);
+        setValue('phone_number', recipe.phone_number);
+        setValue('email', recipe.email);
+        setValue('age', recipe.age);
+        setValue('gender', recipe.gender);
+        setValue('state', recipe.state);
+        setValue('city', recipe.city);
+        setValue('address', recipe.address);
+        setValue('marital_status', recipe.marital_status);
+        setValue('number_of_children', recipe.nbr_of_children);
+        setValue('occupation', recipe.occupation);
+        setValue('salary', recipe.salary);
+      }
+    });
+  };
+
+  const updateRecipe = (data) => {
+    let token = localStorage.getItem('REACT_TOKEN_AUTH_KEY');
+    console.log(data);
+
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${JSON.parse(token)}`
+      },
+      body: JSON.stringify(data)
+    };
+
+    fetch(`/recipe/recipe/${recipeId}`, requestOptions)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        window.location.reload();
+      })
+      .catch(err => console.log(err));
+  };
+
+  const deleteRecipe = (id) => {
+    let token = localStorage.getItem('REACT_TOKEN_AUTH_KEY');
+    console.log(id);
+
+    const requestOptions = {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${JSON.parse(token)}`
+      }
+    };
+
+    fetch(`/recipe/recipe/${id}`, requestOptions)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        getAllRecipes();
+      })
+      .catch(err => console.log(err));
+  };
+
+  return (
     <>
-          <div className="recipe">
-            <h1>List of You Form</h1>
-            {
-              recipes.map(
-                (recipe)=>(
-                <Recipe title={recipe.title} description={recipe.description} />
-                )
-              )
-            }
-          </div>
+      <div className="recipe">
+      <Modal show={show} size="lg" onHide={closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Update Form</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form >
+                {/* Full Name */}
+                <div className="form-group">
+                  <label htmlFor="full_name">Full Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="full_name"
+                    placeholder="Enter full name"
+                    {...register('full_name', { required: true, maxLength: 25 })} // kanverifyo wach l'input makhod
+                  />
+                  {/* Afficher les erreurs */}
+                  {errors.full_name && <small style={{ color: 'red' }}>Full Name is required</small>}
+                  {errors.full_name?.type === 'maxLength' && (
+                    <small style={{ color: 'red' }}>Full Name should be less than 25 characters</small>
+                  )}
+                </div>
+      
+                {/* CIN */}
+                <div className="form-group">
+                  <label htmlFor="cin">CIN</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="cin"
+                    placeholder="Enter CIN"
+                    {...register('cin', { required: true })} // CIN khass ykoun required
+                  />
+                  {errors.cin && <small style={{ color: 'red' }}>CIN is required</small>}
+                </div>
+      
+                {/* Phone Number */}
+                <div className="form-group">
+                  <label htmlFor="phone_number">Phone Number</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="phone_number"
+                    placeholder="Enter phone number"
+                    {...register('phone_number', { required: true })} // Phone number khass ykoun valid
+                  />
+                  {errors.phone_number && <small style={{ color: 'red' }}>Phone Number is required</small>}
+                </div>
+      
+                {/* Email */}
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    placeholder="Enter email"
+                    {...register('email', { required: true })} // email khass ykoun required
+                  />
+                  {errors.email && <small style={{ color: 'red' }}>Email is required</small>}
+                </div>
+      
+                {/* Age */}
+                <div className="form-group">
+                  <label htmlFor="age">Age</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="age"
+                    placeholder="Enter age"
+                    {...register('age', { required: true })} // Age khass ykoun valid o required
+                  />
+                  {errors.age && <small style={{ color: 'red' }}>Age is required</small>}
+                </div>
+      
+                {/* Gender */}
+                <div className="form-group">
+                  <label htmlFor="gender">Gender</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="gender"
+                    placeholder="Enter gender"
+                    {...register('gender', { required: true })} // Gender khass ykoun valid
+                  />
+                  {errors.gender && <small style={{ color: 'red' }}>Gender is required</small>}
+                </div>
+      
+                {/* State */}
+                <div className="form-group">
+                  <label htmlFor="state">State</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="state"
+                    placeholder="Enter state"
+                    {...register('state', { required: true })} // State khass ykoun obligatoire
+                  />
+                  {errors.state && <small style={{ color: 'red' }}>State is required</small>}
+                </div>
+      
+                {/* City */}
+                <div className="form-group">
+                  <label htmlFor="city">City</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="city"
+                    placeholder="Enter city"
+                    {...register('city', { required: true })} // City khass ykoun
+                  />
+                  {errors.city && <small style={{ color: 'red' }}>City is required</small>}
+                </div>
+      
+                {/* Address */}
+                <div className="form-group">
+                  <label htmlFor="address">Address</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="address"
+                    placeholder="Enter address"
+                    {...register('address', { required: true })} // Address khass ykoun
+                  />
+                  {errors.address && <small style={{ color: 'red' }}>Address is required</small>}
+                </div>
+      
+                {/* Marital Status */}
+                <div className="form-group">
+                  <label htmlFor="marital_status">Marital Status</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="marital_status"
+                    placeholder="Enter marital status"
+                    {...register('marital_status', { required: true })} // marital status required
+                  />
+                  {errors.marital_status && <small style={{ color: 'red' }}>Marital Status is required</small>}
+                </div>
+      
+                {/* Number of Children */}
+                <div className="form-group">
+                  <label htmlFor="nbr_of_children">Number of Children</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="nbr_of_children"
+                    placeholder="Enter number of children"
+                    {...register('nbr_of_children')} // Children field khass ykoun optional
+                  />
+                </div>
+      
+                {/* Occupation */}
+                <div className="form-group">
+                  <label htmlFor="occupation">Occupation</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="occupation"
+                    placeholder="Enter occupation"
+                    {...register('occupation', { required: true })} // Occupation required
+                  />
+                  {errors.occupation && <small style={{ color: 'red' }}>Occupation is required</small>}
+                </div>
+      
+                {/* Salary */}
+                <div className="form-group">
+                  <label htmlFor="salary">Salary</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    className="form-control"
+                    id="salary"
+                    placeholder="Enter salary"
+                    {...register('salary', { required: true })} // Salary required
+                  />
+                  {errors.salary && <small style={{ color: 'red' }}>Salary is required</small>}
+                </div>
+      
+                {/* Button to submit form */}
+                <button type="submit" className="btn btn-primary" onClick={handleSubmit(updateRecipe)}>
+                  Submit
+                </button>
+              </form>
+
+
+          </Modal.Body>
+        </Modal>
+        <h1>List of Your Forms</h1>
+        {
+          recipes.map((recipe) => (
+            <Recipe
+              key={recipe.id}
+              full_name={recipe.full_name}
+              cin={recipe.cin}
+              phone_number={recipe.phone_number}
+              email={recipe.email}
+              age={recipe.age}
+              gender={recipe.gender}
+              state={recipe.state}
+              city={recipe.city}
+              address={recipe.address}
+              marital_status={recipe.marital_status}
+              nbr_of_children={recipe.nbr_of_children}
+              occupation={recipe.occupation}
+              salary={recipe.salary}
+              onClick={() => { showModal(recipe.id); }}
+              onDelete={() => { deleteRecipe(recipe.id); }}
+            />
+          ))
+        }
+      </div>
     </>
-  )
-}
+  );
+};
+
 
 
 const LoggedOutHome =()=>{
