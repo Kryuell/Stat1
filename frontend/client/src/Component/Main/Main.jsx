@@ -54,7 +54,7 @@ const LoggedInHome = () => {
     recipes.forEach((recipe) => {
       if (recipe.id === id) {
         setValue('full_name', recipe.full_name);
-        setValue('CIN', recipe.cin);
+        setValue('cin', recipe.cin);
         setValue('phone_number', recipe.phone_number);
         setValue('email', recipe.email);
         setValue('age', recipe.age);
@@ -63,7 +63,7 @@ const LoggedInHome = () => {
         setValue('city', recipe.city);
         setValue('address', recipe.address);
         setValue('marital_status', recipe.marital_status);
-        setValue('number_of_children', recipe.nbr_of_children);
+        setValue('nbr_of_children', recipe.nbr_of_children);
         setValue('occupation', recipe.occupation);
         setValue('salary', recipe.salary);
       }
@@ -87,7 +87,8 @@ const LoggedInHome = () => {
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        window.location.reload();
+       const reload = window.location.reload();
+       reload()
       })
       .catch(err => console.log(err));
   };
