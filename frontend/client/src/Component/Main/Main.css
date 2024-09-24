@@ -307,10 +307,28 @@ body {
 
 
 .recipe{
-    margin: 20px ;
-    height: 70vh;
+    padding: 20px;
+    background-image: url('../../Assests/bg-image.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
-
+.recipe h1 {
+    color: var(--section-background-color);
+}
+.recipe.card {
+    background-color: #032102;
+}
+.card-body p {
+    color: var(--section-background-color);
+}
 .container {
     margin-top: 30px;
+}
+
+div#root {
+    height: 100%;
+}
+div#root .footer-section {
+    top: 300px;
 }

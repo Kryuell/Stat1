@@ -33,8 +33,9 @@ nav {
 
 .Navbar-nav .Navbar-header .logo{
     margin-left: 20px;
+    height: 55px;
 }
-.logo h1:hover{
+.logo h1{
     color: var(--navbar-text-color);
 }
 

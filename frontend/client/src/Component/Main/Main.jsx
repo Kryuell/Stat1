@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import './Main.css';
+import Navbar from '../Navbar/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import Carousel from 'react-bootstrap/Carousel';
@@ -116,6 +117,7 @@ const LoggedInHome = () => {
 
   return (
     <>
+      <Navbar/>
       <div className="recipe">
       <Modal show={show} size="lg" onHide={closeModal}>
           <Modal.Header closeButton>
@@ -328,7 +330,9 @@ const LoggedInHome = () => {
             />
           ))
         }
+        <br></br>
       </div>
+      
     </>
   );
 };

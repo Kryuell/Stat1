@@ -232,7 +232,8 @@ const CreateRecipePage = () => {
             Submit
           </button>
         </form>
-      </div>
+        
+      </div><br />
     </>
   );
 };

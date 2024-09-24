@@ -8,9 +8,9 @@ const LoggedInLinks = () => {
   return (
     <>
       {/* <li><Link to="/home">Home</Link></li> */}
-      <li><Link to="/">Form</Link></li>
+      <li><Link to="/home">Form</Link></li>
       <li><Link to="/createform">Create Form</Link></li>
-      <li><a href='#' onClick={() => logout()}>Log Out</a></li>
+      <li><a href='/' onClick={() => logout()}>Log Out</a></li>
     </>
   );
 };
@@ -37,7 +37,7 @@ const Navbar = () => {
   return (
     <nav className="Navbar-nav">
       <header className="Navbar-header">
-        <div className="logo"><Link to="/"><h1 className="fw-bold">Statify</h1></Link></div>
+        <div className="logo"><h1 className="fw-bold">Statify</h1></div>
         <ul className="center-item">
           {logged ? <LoggedInLinks /> : <LoggedOutLinks />}
         </ul>

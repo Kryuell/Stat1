@@ -5,22 +5,22 @@ const Recipe=({full_name,cin,phone_number,email,age,gender,state,city,address,ma
     return(
         <Card className="recipe">
             <Card.Body>
-                <p>{full_name}</p>
-                <p>{cin}</p>
-                <p>{phone_number}</p>
-                <p>{email}</p>
-                <p>{age}</p>
-                <p>{gender}</p>
-                <p>{state}</p>
-                <p>{city}</p>
-                <p>{address}</p>
-                <p>{marital_status}</p>
-                <p>{nbr_of_children}</p>
-                <p>{occupation}</p>
-                <p>{salary}</p>
+                <p>Full Name: {full_name}</p>
+                <p>CIN: {cin}</p>
+                <p>Phone Number: {phone_number}</p>
+                <p>Email: {email}</p>
+                <p>Age: {age}</p>
+                <p>Gender: {gender}</p>
+                <p>State: {state}</p>
+                <p>City: {city}</p>
+                <p>Address: {address}</p>
+                <p>Marital: {marital_status}</p>
+                <p>Number of children: {nbr_of_children}</p>
+                <p>Occupation: {occupation}</p>
+                <p>Salary: {salary}</p>
             </Card.Body>
             <Button variant='primary' onClick={onClick}>Update</Button>
-                {' '}
+                <br></br>
             <Button variant='danger' onClick={onDelete}>Delete</Button>
         </Card>
     )

@@ -54,6 +54,7 @@ const SignUp = () => {
     <div className="signup">
       <div className="signup-form">
         
+       
 
         {show?
           <>
@@ -62,35 +63,37 @@ const SignUp = () => {
                 {serverResponse}
               </p>
             </Alert>
-            <h1 className="text-uppercase mt-1">SignUp</h1>
+            <p></p>
             </>
             :
-            <h1 className="text-uppercase">SignUp</h1>
+            <p></p>
         }
+        <div className="background-signup">
 
+        <h1 className="text-uppercase">SignUp</h1>
         <form action="form" className="form">
-          <label htmlFor="username" className="text-black-50">Username*</label>
+          <label htmlFor="username" className="text-white-50">Username*</label>
           <input type="text" className="username"
             {...register("username", { required: true, maxLength: 25})}
           />
           {errors.username && <p><small style={{color:'red'}}>Username is required</small></p>}
           {errors.username?.type==="maxLength"&&<p><small style={{color:'red'}}>Max characters should be 25</small></p>}
           
-          <label htmlFor="email" className="text-black-50">Email*</label>
+          <label htmlFor="email" className="text-white-50">Email*</label>
           <input type="email" className="email"
             {...register("email", { required: true, maxLength: 80})}
           />
           {errors.email && <p><small style={{color:'red'}}>Email is required</small></p>}
           {errors.email?.type==="maxLength"&&<p><small style={{color:'red'}}>Max characters should be 80</small></p>}
           
-          <label htmlFor="password" className="text-black-50">Password*</label>
+          <label htmlFor="password" className="text-white-50">Password*</label>
           <input type="password" className="password"
             {...register("password", { required: true, minLength: 8})}
           />
           {errors.password && <p><small style={{color:'red'}}>Password is required</small></p>}
           {errors.password?.type==="minLength"&&<p><small style={{color:'red'}}>Min characters should be 8</small></p>}
 
-          <label htmlFor="confirmPassword" className="text-black-50">confirm Password*</label>
+          <label htmlFor="confirmPassword" className="text-white-50">confirm Password*</label>
           <input type="password" className="confirmPassword"
             {...register("confirmPassword", { required: true, minLength: 8})}
           />
@@ -101,6 +104,9 @@ const SignUp = () => {
           <button className="signup-btn m-3" onClick={handleSubmit(submitForm)}>SignUp</button>
           <p>Already have an account ! <Link to="/login">Log In here</Link>.</p>
         </form>
+        </div>
+        <br />
+        <br />
       </div>
     </div>
     </>

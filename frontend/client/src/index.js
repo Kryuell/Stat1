@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Main from './Component/Main/Main';
 import Login from './Pages/Login/Login';
 import SignUp from './Pages/SignUp/SignUp'
 import reportWebVitals from './reportWebVitals';
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <App/>,
+    element: <Main/>,
   },
   {
     path: "/form",

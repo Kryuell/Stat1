@@ -1,7 +1,7 @@
 /* signup ======= */
 
 :root {
-    --signup-text-color: #000000;
+    --signup-text-color: #ffffff;
     --signup-background-color: #ffffff;
     --signup-button-background-color: #dddddd;
     --signup-button-background-color-hover: #dddddd;
@@ -14,6 +14,10 @@
 }
 
 .signup .signup-form {
+    background-image: url('../../Assests/bg-image.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,8 +27,9 @@
 /* Heading */
 .signup .signup-form h1 {
     font-size: 40px;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 15px;
+    color: var(--signup-text-color);
 }
 
 /* Form */
@@ -41,7 +46,7 @@
     border: black 1px solid;
     padding: 2px 10px;
     outline: none;
-    width: 120%;
+    width: 80%;
     text-size-adjust: 10px;
 }
 
@@ -51,9 +56,10 @@
 
 .signup .signup-form .form p {
     font-size: 14px;
+    color: var(--signup-text-color);
 }
 .signup .signup-form .form p a {
-    color: #000000;
+    color: var(--signup-text-color);
     text-decoration: none;
 }
 .signup .signup-form .form p a:hover {
@@ -70,4 +76,14 @@
 }
 .signup .signup-form .form .signup-btn:hover {
     background-color: rgb(48, 48, 176);
+}
+
+.background-signup {
+    height: 90vh;
+    width: 350px;
+    background-color: #ffffff2e;
+    border-radius: 16px;
+}
+@media  (max-width: 700px){
+    
 }

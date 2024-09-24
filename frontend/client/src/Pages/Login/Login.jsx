@@ -47,16 +47,17 @@ reset();
     <Navbar/>
     <div className="login">
       <div className="form-login">
+        <div className="background-login">
         <h1 className="text-uppercase">Login</h1>
         <form action="form" className="form">
-          <label htmlFor="username" className="text-black-50">Username*</label>
+          <label htmlFor="username" className="text-white-50">Username*</label>
           <input type="text" 
             {...register("username", { required: true, maxLength: 25})}
           />
           {errors.username && <p><small style={{color:'red'}}>Username is required</small></p>}
           {errors.username?.type==="maxLength"&&<p><small style={{color:'red'}}>Max characters should be 25</small></p>}
 
-          <label htmlFor="password" className="text-black-50">Password*</label>
+          <label htmlFor="password" className="text-white-50">Password*</label>
           <input type="password"
             {...register("password", { required: true, minLength: 8})}
           />
@@ -66,6 +67,7 @@ reset();
           <button className="login-btn m-3" type="submit" onClick={handleSubmit(LoginUser)}>Login</button>
           <p>Do not have an account ! <Link to="/signup">Create One</Link>.</p>
         </form>
+        </div>
       </div>
     </div>
     </>
